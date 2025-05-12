@@ -1,11 +1,11 @@
-FROM registry.cn-hangzhou.aliyuncs.com/dockerhub_mirror/nginx
+FROM nginx:alpine
 MAINTAINER jeecgos@163.com
 VOLUME /tmp
 ENV LANG en_US.UTF-8
 RUN echo "server {  \
                       listen       80; \
                       location   /jeecgboot/ { \
-                      proxy_pass              http://192.168.31.106:8980/jeecg-boot/; \
+                      proxy_pass              http://192.168.31.106:8980; \
                       proxy_redirect          off; \
                       proxy_set_header        Host jeecg-boot-system; \
                       proxy_set_header        X-Real-IP \$remote_addr; \
