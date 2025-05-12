@@ -11,5 +11,5 @@ if [ -n "$container_id" ]; then
 else
   echo "Container ${appName} does not exist."
 fi
-docker run --name "$appName" -d --restart always -p 8980:8088 "$appName"
+docker run --name "$appName" -d --restart always -p 8980:8080 "$appName"
 docker image prune -f
