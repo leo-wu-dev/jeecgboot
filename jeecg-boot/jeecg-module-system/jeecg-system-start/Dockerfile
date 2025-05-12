@@ -5,7 +5,7 @@ FROM openjdk:17-ea-29
 WORKDIR /app
 
 # 将编译好的 JAR 文件复制到容器中
-COPY jeecg-boot/jeecg-module-system/jeecg-system-start/target/app.jar /app/app.jar
+COPY ./jeecg-boot/jeecg-module-system/jeecg-system-start/target/app.jar /app/app.jar
 
 # 暴露应用运行的端口（如果有需要的话）
 EXPOSE 8080
