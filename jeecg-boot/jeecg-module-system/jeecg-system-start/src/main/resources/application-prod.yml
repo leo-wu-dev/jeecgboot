@@ -292,7 +292,7 @@ knife4j:
   #开启生产环境屏蔽
   production: true
   basic:
-    enable: true
+    enable: false
     username: jeecg
     password: jeecg1314
 #第三方登录
