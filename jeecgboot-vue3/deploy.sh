@@ -1,10 +1,10 @@
 appName="jeecgboot-vue3"
 
-pnpm install
+pnpm install --prefix ./jeecgboot-vue3
 
-pnpm run build
+pnpm run build --prefix ./jeecgboot-vue3
 
-docker build -t "$appName" .
+docker build -t "$appName" ./jeecgboot-vue3
 
 docker image prune -f
 
