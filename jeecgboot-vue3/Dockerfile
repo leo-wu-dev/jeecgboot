@@ -1,31 +1,18 @@
+# 使用官方的 Nginx 镜像作为基础镜像
 FROM nginx:alpine
-MAINTAINER jeecgos@163.com
-VOLUME /tmp
-ENV LANG en_US.UTF-8
-RUN echo "server {  \
-                      listen       80; \
-                      location   /jeecgboot/ { \
-                      rewrite ^/prod-api(/.*)$ $1 break; \
-                      proxy_pass              http://192.168.31.106:8980; \
-                      proxy_redirect          off; \
-                      proxy_set_header        Host jeecg-boot-system; \
-                      proxy_set_header        X-Real-IP \$remote_addr; \
-                      proxy_set_header        X-Forwarded-For \$proxy_add_x_forwarded_for; \
-                  } \
-                  #解决Router(mode: 'history')模式下，刷新路由地址不能找到页面的问题 \
-                  location / { \
-                     root   /var/www/html/; \
-                      index  index.html index.htm; \
-                      if (!-e \$request_filename) { \
-                          rewrite ^(.*)\$ /index.html?s=\$1 last; \
-                          break; \
-                      } \
-                  } \
-                  access_log  /var/log/nginx/access.log ; \
-              } " > /etc/nginx/conf.d/default.conf \
-    &&  mkdir  -p  /var/www \
-    &&  mkdir -p /var/www/html
 
-ADD ./dist/ /var/www/html/
+# 删除默认的 Nginx 配置文件
+RUN rm -rf /usr/share/nginx/html/*
+
+# 复制本地的静态文件到容器中的 Nginx html 目录
+COPY ./dist /usr/share/nginx/html
+
+# 复制自定义的 Nginx 配置文件（可选）
+# 如果你有自定义的 Nginx 配置，可以在这里复制
+COPY ./nginx.conf /etc/nginx/nginx.conf
+
+# 开放 80 端口
 EXPOSE 80
-EXPOSE 443
+
+# 启动 Nginx
+CMD ["nginx", "-g", "daemon off;"]
