@@ -25,6 +25,6 @@ RUN echo "server {  \
     &&  mkdir  -p  /var/www \
     &&  mkdir -p /var/www/html
 
-ADD jeecgboot-vue3/dist/ /var/www/html/
+ADD ./dist/ /var/www/html/
 EXPOSE 80
 EXPOSE 443
