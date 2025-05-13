@@ -30,7 +30,7 @@ import java.util.Set;
  * 3.online图表的所有配置功能，和sql解析
  * 4.仪表盘的在线配置功能，和sql解析
  * 5.大屏的在线配置功能，和sql解析
- * 
+ *
  * 积木的逻辑单独处理
  * 1.积木报表的在线配置功能，和sql解析
  *
@@ -47,7 +47,7 @@ public class LowCodeModeInterceptor implements HandlerInterceptor {
 
     @Resource
     private JeecgBaseConfig jeecgBaseConfig;
-    @Autowired
+    @Resource
     private CommonAPI commonAPI;
 
     /**
@@ -73,17 +73,17 @@ public class LowCodeModeInterceptor implements HandlerInterceptor {
                 //当前登录人拥有的角色
                 hasRoles = commonAPI.queryUserRolesById(loginUser.getId());
             }
-            
+
             log.info("get loginUser info: {}", loginUser);
             log.info("get loginRoles info: {}", hasRoles != null ? hasRoles.toArray() : "空");
-            
+
             //拥有的角色 和 允许开发角色存在交集
             boolean hasIntersection = CommonUtils.hasIntersection(hasRoles, CommonConstant.allowDevRoles);
             //如果是超级管理员 或者 允许开发的角色，则不做限制
             if (loginUser!=null && ("admin".equals(loginUser.getUsername()) || hasIntersection)) {
                 return true;
             }
-            
+
             this.returnErrorMessage(response);
             return false;
         }
