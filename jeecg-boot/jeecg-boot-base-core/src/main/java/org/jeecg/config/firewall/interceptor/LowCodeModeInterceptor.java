@@ -71,6 +71,9 @@ public class LowCodeModeInterceptor implements HandlerInterceptor {
 
             if (loginUser != null) {
                 //当前登录人拥有的角色
+                if(commonAPI == null){
+                    commonAPI = SpringContextUtils.getBean(CommonAPI.class);
+                }
                 hasRoles = commonAPI.queryUserRolesById(loginUser.getId());
             }
 
