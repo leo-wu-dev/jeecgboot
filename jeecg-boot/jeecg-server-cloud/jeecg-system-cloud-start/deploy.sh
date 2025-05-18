@@ -1,5 +1,5 @@
-appName="jeecg-system-start"
-docker build -t "$appName" ./jeecg-boot/jeecg-module-system/jeecg-system-start/
+appName="jeecg-system-cloud-start"
+docker build -t "$appName" ./jeecg-boot/jeecg-server-cloud/jeecg-system-cloud-start/
 # 判断容器是否存在
 container_id=$(docker ps -a --filter "name=${appName}" -q)
 if [ -n "$container_id" ]; then
