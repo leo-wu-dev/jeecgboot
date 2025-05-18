@@ -12,17 +12,18 @@ spring:
               environment: local
   security:
     user:
-      name: "admin"
-      password: "admin"
+      name: "nacos"
+      password: "Wgy23822672@wu"
   application:
     name: jeecg-monitor
   cloud:
     nacos:
       discovery:
         server-addr: @config.server-addr@
-        metadata:
-          user.name: ${spring.security.user.name}
-          user.password: ${spring.security.user.password}
+        group: @config.group@
+        namespace: @config.namespace@
+        username: @config.username@
+        password: @config.password@
 # 服务端点检查
 management:
   trace:

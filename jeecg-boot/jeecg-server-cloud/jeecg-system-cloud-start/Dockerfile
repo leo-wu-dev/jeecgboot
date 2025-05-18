@@ -1,15 +1,14 @@
-FROM registry.cn-hangzhou.aliyuncs.com/dockerhub_mirror/java:21-anolis
+# 使用官方 OpenJDK 镜像作为基础镜像
+FROM openjdk:17-ea-29
 
-MAINTAINER jeecgos@163.com
+# 设置工作目录
+WORKDIR /app
 
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+# 将编译好的 JAR 文件复制到容器中
+COPY ./target/app.jar /app/app.jar
 
-RUN mkdir -p /jeecg-system-cloud
+# 暴露应用运行的端口（如果有需要的话）
+EXPOSE 8080
 
-WORKDIR /jeecg-system-cloud
-
-EXPOSE 7001
-
-ADD ./target/jeecg-system-cloud-start-3.8.0.jar ./
-
-CMD sleep 60;java -Dfile.encoding=utf-8 -Djava.security.egd=file:/dev/./urandom -jar jeecg-system-cloud-start-3.8.0.jar
+# 设置容器启动时的命令
+CMD ["java", "-jar", "/app/app.jar", "--spring.profiles.active=prod"]
