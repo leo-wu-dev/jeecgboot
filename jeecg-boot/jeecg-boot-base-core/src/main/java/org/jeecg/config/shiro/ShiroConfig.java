@@ -56,7 +56,7 @@ public class ShiroConfig {
     private JeecgBaseConfig jeecgBaseConfig;
     @Autowired(required = false)
     private RedisProperties redisProperties;
-    
+
     /**
      * Filter Chain定义说明
      *
@@ -88,6 +88,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/sys/checkCaptcha", "anon"); //登录验证码接口排除
         filterChainDefinitionMap.put("/sys/smsCheckCaptcha", "anon"); //短信次数发送太多验证码排除
         filterChainDefinitionMap.put("/sys/login", "anon"); //登录接口排除
+        filterChainDefinitionMap.put("/sys/getAccessToken", "anon"); //登录接口排除
         filterChainDefinitionMap.put("/sys/mLogin", "anon"); //登录接口排除
         filterChainDefinitionMap.put("/sys/logout", "anon"); //登出接口排除
         filterChainDefinitionMap.put("/sys/thirdLogin/**", "anon"); //第三方登录
@@ -144,7 +145,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/jmreport/**", "anon");
         filterChainDefinitionMap.put("/**/*.js.map", "anon");
         filterChainDefinitionMap.put("/**/*.css.map", "anon");
-        
+
         //积木BI大屏和仪表盘排除
         filterChainDefinitionMap.put("/drag/view", "anon");
         filterChainDefinitionMap.put("/drag/page/queryById", "anon");
@@ -298,7 +299,7 @@ public class ShiroConfig {
     /**
      * RedisConfig在项目starter项目中
      * jeecg-boot-starter-github\jeecg-boot-common\src\main\java\org\jeecg\common\modules\redis\config\RedisConfig.java
-     * 
+     *
      * 配置shiro redisManager
      * 使用的是shiro-redis开源插件
      *
